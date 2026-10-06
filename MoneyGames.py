@@ -10,11 +10,26 @@ pygame.mixer.init()
 
 gunshot_sound = pygame.mixer.Sound("gunshot.mp3")
 drag_sound = pygame.mixer.Sound("dragging.mp3")
+hit_sound = pygame.mixer.Sound("hit.mp3")
+typing_sound = pygame.mixer.Sound("typing.mp3")
 
 from datetime import datetime
 JOURS, MOIS = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"], ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
 now = datetime.now()
 
+
+def ecrire_lent(texte, vitesse=0.2):
+    for lettre in texte:
+        sys.stdout.write(lettre)
+        sys.stdout.flush()
+        if lettre in [".", "!", "?", ":"]:
+            time.sleep(0.5)
+        elif lettre in [",", ";"]:
+            time.sleep(0.25)
+        else:
+            time.sleep(vitesse)
+            
+    print()
 
 def ecrire(texte, vitesse=0.07):
     for lettre in texte:
@@ -79,4 +94,45 @@ if skip in ["no", "n", "na", "nah", "NO"] :
     time.sleep(1)
     print()
     ecrire("'\033[3mAlright\033[0m'You entered the door and it closed behind you.. Inside, its pich black. As you tried to look around, you feel someone behind you.")
-    gun .play()
+
+print()
+ecrire("skipping intro......")
+time.sleep(2)
+ecrire("---------------")
+time.sleep(1)
+hit_sound.play()
+time.sleep(2)
+print()
+ecrire_lent("You feel something grab you by the feets.....")
+drag_sound.play()
+time.sleep(8)
+print()
+ecrire("'\033[3mWhere... Where am i...?")
+time.sleep(3)
+print()
+ecrire("--------------")
+print()
+ecrire("Wait ! time to choose difficulty !")
+ecrire("you can choose between :")
+ecrire("- Discovery 'with 7 lifes'")
+ecrire("- chill 'with 5 lifes'")
+ecrire("- normal 'with 3 lifes'")
+ecrire("- real life 'with 1 life'")
+print()
+ecrire("Some games will be luck based ! So i recommand normal to have a good gameplay, but its your choice after all.")
+print()
+
+player_lives = "not defined"
+while player_lives == "not defined" :
+    gamemode_choice = input("Your gamemode : ")
+    if gamemode_choice in ["discovery", "Discovery"] :
+        player_lives = 7
+    elif gamemode_choice in ["chill", "Chill"] :
+        player_lives = 5
+    elif gamemode_choice in ["normal", "Normal"] :
+        player_lives = 3
+    elif gamemode_choice in ["real life", "Real life"] :
+        player_lives = 1
+    else :
+        ecrire("That is not a valid choice !, choose again !")
+        print()
