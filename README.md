@@ -1,0 +1,1 @@
+This is a game that i will just use for personal project, idk if i will be able to post it online cause it play on the terminal (can be virus for toher to think), so steal my code, some part or the idea, i dont really care it just a lot print with variable. :)
